@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.levy.mapper.BookMapper">
+    <insert id="addBook" parameterType="book">
+        insert into t_book values(null,#{name},#{author},#{price},#{sales},#{stock},#{imgPath});
+    </insert>
+
+    <delete id="deleteBookById" parameterType="int">
+        delete from t_book where id = #{id}
+    </delete>
+
+    <update id="updateBook" parameterType="book">
+        update t_book set `name` = #{name},`author` = #{author},`price` = #{price},`sales` = #{sales},
+                          `stock` = #{stock},imgPath = #{imgPath} where id = #{id}
+    </update>
+
+    <select id="queryBookById" parameterType="int" resultType="book">
+        select * from t_book where id = #{id}
+    </select>
+
+    <select id="queryBooks" resultType="book">
+        select * from t_book
+    </select>
+
+    <select id="queryBooksByPrice" resultType="book">
+        select * from t_book where price between #{min} and #{max}
+    </select>
+</mapper>
